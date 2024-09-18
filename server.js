@@ -22,10 +22,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/web503_01')
     .then(result => {
         //router: điều hướng ng dùng
         app.get('/list', proController.getList);
-
-        app.get('/create', (req,res) => {
-            res.render('create');
-        });
+        app.get('/create', proController.create);
+        app.post('/save', proController.save);
 
         app.listen(port, () => {
             console.log(`Server is running in port ${port}`);
