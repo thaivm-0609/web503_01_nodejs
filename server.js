@@ -22,9 +22,10 @@ mongoose.connect('mongodb://127.0.0.1:27017/web503_01')
     .then(result => {
         //router: điều hướng ng dùng
         app.get('/list', proController.getList);
-        app.get('/create', proController.create);
-        app.post('/save', proController.save);
-
+        app.get('/create', proController.create); //trả về form thêm mới
+        app.post('/save', proController.save); //lưu dữ liệu vào db
+        app.get('/edit/:id', proController.edit); //khai báo router cho chức năng edit
+        app.post('/update/:id', proController.update);//cập nhật dữ liệu vào db
         app.listen(port, () => {
             console.log(`Server is running in port ${port}`);
         })

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Đây là trang create</h1>
+    <form action="/update/<%= oldPro.id %>" method="POST">
+        <div>
+            <label for="">Tên</label>
+            <input type="text" name="ten" value="<%= oldPro.ten %>">
+        </div>
+        <div>
+            <label for="">Giá</label>
+            <input type="number" name="gia" value="<%= oldPro.gia %>">
+        </div>
+        <div>
+            <label for="">Mô tả</label>
+            <input type="text" name="mota" value="<%= oldPro.mota %>">
+        </div>
+        <div>
+            <label for="">Ảnh</label>
+            <input type="text" name="anh" value="<%= oldPro.anh %>">
+        </div>
+        <input type="submit" value="Sửa">
+    </form>
+</body>
+</html>

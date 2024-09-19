@@ -14,8 +14,17 @@ class ProductController {
         }
     }
 
-    create(req,res) {
+    create(req,res) { 
         res.render('create');
+    }
+
+    async edit(req,res) {
+        //lấy dữ liệu cũ của bản ghi
+        console.log(req.params, req.query);
+        const id = req.params.id; //lấy id của sản phẩm cần sửa
+        const oldPro = await Product.findById(id); //lấy data by id
+        
+        res.render('edit', {oldPro}); //trả ra giao diện edit kèm dữ liệu
     }
 
     async save(req,res) {
@@ -37,6 +46,26 @@ class ProductController {
         } catch (error) {
             console.log(err.message);
         }
+    }
+
+    async update(req,res) {
+        try {
+            //lấy dữ liệu mới
+            const newData = {
+                ten: req.body.ten,
+                gia: req.body.gia,
+                mota: req.body.mota,
+                anh: req.body.anh
+            };
+            const id = req.params.id; //lấy id cần sửa
+            //cập nhật vào db: tham số 1: id; tham số 2: dữ liệu mới
+            await Product.findByIdAndUpdate(id,newData); 
+
+            res.redirect('/list');
+        } catch (error) {
+            console.log(error.message);
+        }
+        
     }
 }
 
