@@ -26,6 +26,11 @@ mongoose.connect('mongodb://127.0.0.1:27017/web503_01')
         app.post('/save', proController.save); //lưu dữ liệu vào db
         app.get('/edit/:id', proController.edit); //khai báo router cho chức năng edit
         app.post('/update/:id', proController.update);//cập nhật dữ liệu vào db
+        app.get('/delete/:id', proController.delete); //xóa bản ghi
+        
+        //restful API:
+        app.get('/products', proController.apiList); //hiển thị danh sách
+
         app.listen(port, () => {
             console.log(`Server is running in port ${port}`);
         })

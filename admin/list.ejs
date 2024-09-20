@@ -26,7 +26,16 @@
                     <td><%= p.gia %></td>
                     <td><%= p.mota %></td>
                     <td><img src="<%= p.anh %>" alt=""></td>
-                    <td><a href="/edit/<%= p.id %>" type="button">Sửa</a></td>
+                    <td>
+                        <a href="/edit/<%= p.id %>" type="button">Sửa</a>
+                        <a 
+                            onclick="return confirm('Bạn có chắc ko?')"
+                            href="/delete/<%= p.id %>"
+                            type="button"
+                        >
+                            Xóa
+                        </a>
+                    </td>
                 </tr>
             <% }) %>
             <tr></tr>

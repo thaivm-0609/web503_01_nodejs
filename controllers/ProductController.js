@@ -65,8 +65,34 @@ class ProductController {
         } catch (error) {
             console.log(error.message);
         }
-        
     }
+
+    async delete(req,res) {
+        try {
+            const id = req.params.id; //lấy id bản ghi cần xóa
+            await Product.findByIdAndDelete(id); //gọi hàm xóa
+
+            res.redirect('/list'); //điều hướng về trang danh sách
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+    //Restful API:
+    async apiList(req,res) {
+        try {
+            const products = await Product.find();
+            res.status(200).json({ 
+                "message": "Lấy danh sách thành công",
+                "data": products 
+            })
+        } catch (error) {
+            res.status(400).json({
+                "message": "Something went wrong"
+            })
+        }
+    }
+
 }
 
 export default ProductController;
