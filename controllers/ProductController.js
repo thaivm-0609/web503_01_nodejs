@@ -93,6 +93,87 @@ class ProductController {
         }
     }
 
+    async apiDetail(req,res) {
+        try {
+            //lấy id của bản ghi
+            const id = req.params.id;
+            const product = await Product.findById(id);
+            
+            res.status(200).json({
+                "message": "Lấy dữ liệu thành công",
+                "data": product
+            })
+        } catch (error) {
+            res.status(400).json({
+                "message": "Something went wrong"
+            })
+        }
+    }
+
+    async apiCreate(req,res) {
+        try {
+            //B1: lấy dữ liệu ng dùng gửi lên
+            const data = {
+                ten: req.body.ten,
+                gia: req.body.gia,
+                mota: req.body.mota,
+                anh: req.body.anh,
+            };
+
+            //B2: lưu vào trong db
+            const newProduct = await Product.create(data);
+            res.status(200).json({
+                "message": "Thêm mới thành công",
+                "data": newProduct
+            })
+        } catch (error) {
+            res.status(400).json({
+                "message": "Something went wrong"
+            })
+        }
+    }
+
+    async apiUpdate(req,res) {
+        try {
+            //B1: lấy id bản ghi cần sửa
+            const id = req.params.id;
+            //B2: lấy dữ liệu 
+            const data = {
+                ten: req.body.ten,
+                gia: req.body.gia,
+                mota: req.body.mota,
+                anh: req.body.anh,
+            };
+            //B3: lưu dữ liệu vào db
+            const updatedProduct = await Product.findByIdAndUpdate(id,data);
+            res.status(200).json({
+                "message": "Cập nhật thành công",
+                "data": updatedProduct
+            })
+        } catch (error) {
+            res.status(400).json({
+                "message": "Something went wrong"
+            })
+        }
+    }
+
+    async apiDelete(req,res) {
+        try {
+            //B1: lấy id cần xóa
+            const id = req.params.id;
+            //B2: xóa
+            const deletedPro = await Product.findByIdAndDelete(id);
+            res.status(200).json({
+                "message": "Xóa thành công",
+                "data": deletedPro
+            })
+        } catch (error) {
+            res.status(400).json({
+                "message": "Something went wrong"
+            })
+        }
+    }
+
 }
 
 export default ProductController;

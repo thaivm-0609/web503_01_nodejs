@@ -30,6 +30,10 @@ mongoose.connect('mongodb://127.0.0.1:27017/web503_01')
         
         //restful API:
         app.get('/products', proController.apiList); //hiển thị danh sách
+        app.get('/products/:id', proController.apiDetail); //hiển thị chi tiết
+        app.post('/products', proController.apiCreate); //thêm mới
+        app.put('/products/:id', proController.apiUpdate); //chỉnh sửa
+        app.delete('/products/:id', proController.apiDelete); //xóa
 
         app.listen(port, () => {
             console.log(`Server is running in port ${port}`);
