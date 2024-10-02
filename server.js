@@ -1,10 +1,12 @@
 import express from "express"; //import express để khởi tạo server node
 import mongoose from "mongoose"; //import mongoose để kết nối với mongoDB
 import ProductController from "./controllers/ProductController.js";
+import AuthController from "./controllers/AuthController.js";
 
 const app = new express();
 const port = 3000;
 const proController = new ProductController();
+const authController = new AuthController();
 
 //cấu hình ejs
 app.set('view engine', 'ejs'); //khai báo view engine
@@ -35,6 +37,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/web503_01')
         app.put('/products/:id', proController.apiUpdate); //chỉnh sửa
         app.delete('/products/:id', proController.apiDelete); //xóa
 
+        app.post('/register', authController.register); //hàm đăng ký
+        app.post('/login', authController.login); //hàm đăng nhập
         app.listen(port, () => {
             console.log(`Server is running in port ${port}`);
         })
