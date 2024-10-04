@@ -2,6 +2,7 @@ import express from "express"; //import express để khởi tạo server node
 import mongoose from "mongoose"; //import mongoose để kết nối với mongoDB
 import ProductController from "./controllers/ProductController.js";
 import AuthController from "./controllers/AuthController.js";
+import { checkPermission } from "./middlewares/index.js"; //kiểm tra quyền truy cập
 
 const app = new express();
 const port = 3000;
@@ -33,9 +34,9 @@ mongoose.connect('mongodb://127.0.0.1:27017/web503_01')
         //restful API:
         app.get('/products', proController.apiList); //hiển thị danh sách
         app.get('/products/:id', proController.apiDetail); //hiển thị chi tiết
-        app.post('/products', proController.apiCreate); //thêm mới
-        app.put('/products/:id', proController.apiUpdate); //chỉnh sửa
-        app.delete('/products/:id', proController.apiDelete); //xóa
+        app.post('/products', checkPermission, proController.apiCreate); //thêm mới
+        app.put('/products/:id', checkPermission, proController.apiUpdate); //chỉnh sửa
+        app.delete('/products/:id', checkPermission, proController.apiDelete); //xóa
 
         app.post('/register', authController.register); //hàm đăng ký
         app.post('/login', authController.login); //hàm đăng nhập

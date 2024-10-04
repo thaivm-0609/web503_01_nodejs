@@ -59,7 +59,7 @@ class AuthController {
                 } else { //nếu compare đúng => tạo token
                     const token = jsonwebtoken.sign(
                         { data: email }, //dữ liệu dùng để tạo token
-                        'web503.01', 
+                        'web503.01', //key
                         { expiresIn: 60*60 } //thời gian hết hạn
                     );
                     res.status(200).json({
